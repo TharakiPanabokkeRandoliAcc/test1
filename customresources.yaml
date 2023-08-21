@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    labels:
+        key1: val1
+    name: test-cm-tharaki
+    namespace: tharaki-test-2
+spec:
+    description: Hello world example that displays the content of a parameter
+    params:
+        - param1
