@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    annotations: {}
+    labels:
+        app: giops-github
+        app-id: 938edfb9-3fdf-4dd8-81b7-b7fec195249a
+        cluster-agent-id: cc359993-5cfa-4135-93fd-95760d2ee3cf
+        cluster-agent-name: ca-agent-1-dont-use
+        environment-id: d2f6ed69-bc3c-4924-97e6-d0bec5d7ac1a
+        environment-name: dev
+        metadata-1: YUBhLmE
+        organization-id: 7b000cea-2f5e-4479-879a-771a5337d1c9
+        product: app-director
+        project-id: 57625556-44bd-4d8b-a950-6a92c9a1783d
+    name: appdir-cc359993-giops-github-deployment-dev
+    namespace: tharaki-test-2
+spec:
+    replicas: 1
+    revisionHistoryLimit: 1
+    selector:
+        matchLabels:
+            app-id: 938edfb9-3fdf-4dd8-81b7-b7fec195249a
+            cluster-agent-id: cc359993-5cfa-4135-93fd-95760d2ee3cf
+            environment-id: d2f6ed69-bc3c-4924-97e6-d0bec5d7ac1a
+            environment-name: dev
+    strategy:
+        rollingUpdate:
+            maxSurge: 25%
+            maxUnavailable: 25%
+        type: RollingUpdate
+    template:
+        metadata:
+            annotations: {}
+            labels:
+                app: giops-github
+                app-id: 938edfb9-3fdf-4dd8-81b7-b7fec195249a
+                cluster-agent-id: cc359993-5cfa-4135-93fd-95760d2ee3cf
+                cluster-agent-name: ca-agent-1-dont-use
+                environment-id: d2f6ed69-bc3c-4924-97e6-d0bec5d7ac1a
+                environment-name: dev
+                metadata-1: YUBhLmE
+                organization-id: 7b000cea-2f5e-4479-879a-771a5337d1c9
+                product: app-director
+                project-id: 57625556-44bd-4d8b-a950-6a92c9a1783d
+        spec:
+            containers:
+                - envFrom: []
+                  image: docker.io/s15504/docker-hub:tag
+                  imagePullPolicy: Always
+                  name: appdir-cc359993-giops-github
+                  ports:
+                    - containerPort: 8080
+                      protocol: TCP
+                  resources:
+                    limits:
+                        cpu: 100m
+                        memory: 256Mi
+                    requests:
+                        cpu: 100m
+                        memory: 256Mi
+                  securityContext:
+                    privileged: false
+                  terminationMessagePath: /dev/termination-log
+                  terminationMessagePolicy: File
+                  volumeMounts: []
+            dnsPolicy: ClusterFirst
+            restartPolicy: Always
+            schedulerName: default-scheduler
+            serviceAccountName: giops-github-sa-dev
+            terminationGracePeriodSeconds: 30
+            volumes: []
+status: {}
